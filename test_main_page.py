@@ -6,7 +6,7 @@ import pytest
 from .pages import LoginPage, MainPage
 
 # Глобальная константа URL, чтобы не повторять строку несколько раз
-LINK = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
+LINK = "http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209/"
 
 
 @pytest.mark.login_guest
