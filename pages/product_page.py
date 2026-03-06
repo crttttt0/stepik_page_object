@@ -12,6 +12,16 @@ class ProductPage(BasePage):
             *ProductPageLocators.MESSAGE_SECTION
         ), "Секция сообщений не появилась"
 
+    def should_not_be_message(self):
+        assert self.is_not_element_present(
+            *ProductPageLocators.MESSAGE_SECTION
+        ), "Сообщение появилось за указанное время"
+
+    def should_message_be_dissapeared(self):
+        assert self.is_disappeared(
+            *ProductPageLocators.MESSAGE_SECTION
+        ), "Сообщение не исчезло за указанное время"
+
     def should_alert_title_and_book_title_be_same(self):
         assert (
             self.browser.find_element(*ProductPageLocators.BOOK_TITLE).text
