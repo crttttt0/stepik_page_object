@@ -1,3 +1,3 @@
-### Репозиторий для рецензии 4.3 урока по Selenium на Stepik
+### Репозиторий для рецензии итогового проекта Selenium на Stepik
 
-ка
+Запуск: `pytest -v --tb=line --language=en -m need_review`

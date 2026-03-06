@@ -1,12 +1,14 @@
-import pytest, time
+import time
 
-from .pages import ProductPage, BasketPage, LoginPage
+import pytest
+
+from .pages import BasketPage, LoginPage, ProductPage
 
 
 @pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
-    
+
     page = ProductPage(browser, link, 10)
     page.open()
 
@@ -26,19 +28,18 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
 
     page.add_to_cart()
     page.should_not_be_message()
-    
-    
+
+
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
         link = "http://selenium1py.pythonanywhere.com/accounts/login/"
         page = LoginPage(browser, link)
         page.open()
-        
+
         page.register_new_user(str(time.time()) + "@fakemail.org", "qwertyyyy")
         page.should_be_authorized_user()
-    
-    
+
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"
@@ -52,9 +53,10 @@ class TestUserAddToBasketFromProductPage:
         page.should_alert_title_and_book_title_be_same()
         page.should_alert_cost_and_book_cost_be_same()
 
-
     @pytest.mark.xfail
-    def test_user_cant_see_success_message_after_adding_product_to_basket(self, browser):
+    def test_user_cant_see_success_message_after_adding_product_to_basket(
+        self, browser
+    ):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         page = ProductPage(browser, link)
         page.open()

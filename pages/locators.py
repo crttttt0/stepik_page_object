@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class BasePageLocators:
+    # Общие локаторы, встречающиеся на большинстве страниц
     LOGIN_LINK = (By.ID, "login_link")
     LOGIN_LINK_INVALID = (By.ID, "login_link_inc")
 
@@ -9,10 +10,12 @@ class BasePageLocators:
 
 
 class MainPageLocators:
+    # Локаторы специфичные для главной страницы
     LOGIN_LINK = (By.ID, "registration_link")
 
 
 class LoginPageLocators:
+    # Элементы формы входа и регистрации на странице логина
     LOGIN_FORM = (By.ID, "login_form")
     REGISTER_FORM = (By.ID, "register_form")
 
@@ -25,6 +28,7 @@ class LoginPageLocators:
 
 
 class ProductPageLocators:
+    # Локаторы для страницы товара: кнопки и сообщения
     ADD_TO_CART = (By.CSS_SELECTOR, "#add_to_basket_form button")
     MESSAGE_SECTION = (By.CLASS_NAME, "alert-success")
 
@@ -35,5 +39,6 @@ class ProductPageLocators:
 
 
 class BasketPageLocators:
+    # Элементы на странице корзины
     BASKET = (By.CLASS_NAME, "basket-title")
     BASKET_IS_EMPTY = (By.CSS_SELECTOR, "#content_inner p")

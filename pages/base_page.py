@@ -1,10 +1,8 @@
 import math
 
-from selenium.common.exceptions import (
-    NoAlertPresentException,
-    NoSuchElementException,
-    TimeoutException,
-)
+from selenium.common.exceptions import (NoAlertPresentException,
+                                        NoSuchElementException,
+                                        TimeoutException)
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -12,12 +10,16 @@ from .locators import BasePageLocators
 
 
 class BasePage:
+    """Базовый класс для всех страниц.
+    Содержит общие методы для взаимодействия с браузером"""
+
     def __init__(self, browser, url: str, timeout: int = 0):
         self.browser = browser
         self.url = url
         self.timeout = timeout
 
     def open(self):
+        self.browser.implicitly_wait(self.timeout)
         self.browser.get(self.url)
 
     def go_to_login_page(self):
@@ -33,6 +35,7 @@ class BasePage:
         self.browser.find_element(*BasePageLocators.VIEW_CART).click()
 
     def is_element_present(self, how, what):
+        # Проверяет, существует ли элемент на странице, возвращает bool
         try:
             self.browser.find_element(how, what)
         except NoSuchElementException:
@@ -60,6 +63,7 @@ class BasePage:
         return True
 
     def solve_quiz_and_get_code(self):
+        # Метод для прохождения встроенного квиза на тестовом сайте
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))

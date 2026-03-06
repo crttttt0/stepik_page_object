@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
-
 # Классы для установки драйверов, при первой установке будет долго скачивать и устанавливать без логов в консоль
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
@@ -28,10 +27,12 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="function")
 def browser(request):
+    # Получаем язык из параметров запуска pytest
     lang = request.config.getoption("language")
     if not lang:
         raise pytest.UsageError("Не выбран язык браузера")
 
+    # Определяется, какой браузер будем инстанцировать
     browser_name = request.config.getoption("browser_name")
 
     print("\nОткрытие драйвера...")
@@ -49,6 +50,7 @@ def browser(request):
             service = FirefoxService(executable_path=GeckoDriverManager().install())
             browser = webdriver.Firefox(service=service, options=options)
 
+    # Передаём объект браузера в тесты, далее будет выполняться teardown
     yield browser
 
     print("\nЗакрытие драйвера...")

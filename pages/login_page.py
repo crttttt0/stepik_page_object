@@ -3,12 +3,15 @@ from .locators import BasePageLocators, LoginPageLocators
 
 
 class LoginPage(BasePage):
+    """Страница авторизации/регистрации"""
+
     def should_be_login_page(self):
         self.should_be_login_url()
         self.should_be_login_form()
         self.should_be_register_form()
 
     def should_be_login_url(self):
+        # Проверяем, что в текущей ссылке есть подстрока 'login'
         assert "login" in self.url, "Ссылка не принадлежит странице авторизации/входа"
 
     def should_be_login_form(self):
@@ -18,6 +21,7 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM)
 
     def register_new_user(self, email, password):
+        # Заполняем поля регистрации и отправляем форму
         email_input = self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL)
         password_input = self.browser.find_element(
             *LoginPageLocators.REGISTRATION_PASSWORD
@@ -35,6 +39,7 @@ class LoginPage(BasePage):
         registration_button.click()
 
     def should_be_authorized_user(self):
+        # Регистрация/логин проверяется с помощью иконки
         assert self.is_element_present(
             *LoginPageLocators.USER_ICON
         ), "Не найдена иконка пользователя. Скорее всего, он не авторизован"

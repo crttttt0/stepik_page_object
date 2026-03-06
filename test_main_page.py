@@ -1,8 +1,11 @@
-import pytest, time
+# Тесты для проверки авторизации на главной странице
+import time
+
+import pytest
 
 from .pages import LoginPage, MainPage
 
-# Глобавльная константа для того чтобы не дублировать ссылки
+# Глобальная константа URL, чтобы не повторять строку несколько раз
 LINK = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
 
 
@@ -11,8 +14,9 @@ class TestLoginFromMainPage:
     def test_guest_can_go_to_login_page(self, browser):
         link = LINK
         page = MainPage(browser, link)
-        
+
         page.open()
+        # Переходим на страницу логина
         page.go_to_login_page()
 
         login_page = LoginPage(browser, browser.current_url)
@@ -23,4 +27,5 @@ class TestLoginFromMainPage:
         page = MainPage(browser, link)
 
         page.open()
+        # На главной должна быть ссылка на страницу входа
         page.should_be_login_link()
