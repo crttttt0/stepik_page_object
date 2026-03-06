@@ -9,4 +9,4 @@ class MainPage(BasePage):
         login_link.click()
         
     def should_be_login_link(self):
-        pass
+        assert self.is_element_present(By.ID, "login_link_invalid"), "Нет ссылки на логин"
