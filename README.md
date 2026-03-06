@@ -1,3 +1,4 @@
 ### Репозиторий для рецензии итогового проекта Selenium на Stepik
 
-Запуск: `pytest -v --tb=line --language=en -m need_review`
+- Запуск всех тестов: `pytest -v --tb=line --language=en`
+- Запуск тестов с маркировкой:`pytest -v --tb=line --language=en -m need_review`
